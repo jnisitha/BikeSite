@@ -2,10 +2,13 @@
 
 <h1> This is the Bike Routes Page </h1>
 
+<a href="/bikeroutes/new">Add new Bike Route</a>
+
 <% bikeroutes.forEach(function(bikeroute){ %>
     <div>
         <h4><%= bikeroute.title %></h4>
         <img src= "<%= bikeroute.image %>" >
+
     </div>
 <% }); %>
 
