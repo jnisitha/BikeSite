@@ -13,7 +13,8 @@ app.set("view engine", "ejs");
 var bikeRoutesSchema = new mongoose.Schema({
     title: String,
     image: String,
-    author: String
+    author: String,
+    description: String
 });
 
 var BikeRouteMod = mongoose.model("BikeRoute", bikeRoutesSchema);//creates the model from the schema
@@ -26,7 +27,8 @@ app.get("/", function(req, res){
 //     {
 //         title: "Niagara Route", 
 //         image: "/images/biketrip.jpg", 
-//         author: "Nisitha"    
+//         author: "Nisitha",
+//         description: "We travelled from Toronto to Niagara on bike!"    
 //     }, function(err, bikeroutes){
 //         if(err){
 //             console.log(err);
@@ -41,24 +43,26 @@ app.get("/", function(req, res){
 //     {title: "Trip to Yelow Knife", image: "/images/YellowKnife.jpg", author: "Nisitha"}
 // ];
 
-
+//INDEX - 
 app.get("/bikeroutes", function(req, res){  
     //Get BikeRoutes from the Database
     BikeRouteMod.find({}, function(err, allBikeroutes){
         if(err){
             console.log(err);
         }else{
-            res.render("bikeroutes", {bikeroutes: allBikeroutes});
+            res.render("index", {bikeroutes: allBikeroutes});
         }
     });
     //res.render ("bikeroutes", {bikeroutes: bikeroutes});
 });
 
+//CREATE - add new to DB
 app.post("/bikeroutes", function(req, res){
     var title = req.body.title;
     var image = req.body.image;
     var author=req.body.author;
-    var newBikeRoute = {title: title, image: image, author: author}
+    var description = req.body.description;
+    var newBikeRoute = {title: title, image: image,description:description, author: author}
     //Create new Route and add to the DB
     BikeRouteMod.create(newBikeRoute, function(err, newlyCreated){
         if(err){
@@ -71,9 +75,22 @@ app.post("/bikeroutes", function(req, res){
 
 });
 
+//NEW - show form to create new
 app.get("/bikeroutes/new", function(req, res){
     res.render("new");
 });
+
+//SHOW -  show information about one bike route
+app.get("/bikeroutes/:id", function(req, res){
+    BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
+        if(err){
+            console.log(err);
+        }else{
+            res.render("show", {bikeroute: foundBikeRoute});
+        }
+    });
+});
+
 
 app.listen(3000, function(){
     console.log("BikeSite has started!");
