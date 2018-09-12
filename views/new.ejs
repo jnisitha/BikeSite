@@ -1,14 +1,28 @@
 <% include partials/header %>
 
-<h1>Create a new Bike Route </h1>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Create a new Bike Route </h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action = "" method = "POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="title" placeholder="title">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="image" placeholder="image url">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="author" placeholder="Author name">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block"> Submit </button>
+                </div>
+            </form>
+            <a href="/bikroutes">Back</a>
+        </div>
 
-<form action = "" method = "POST">
-    <input type="text" name="title" placeholder="title">
-    <input type="text" name="image" placeholder="image url">
-    <input type="text" name="author" placeholder="Author name">
-    <button> Submit </button>
-</form>
+    </div>
 
-<a href="/bikroutes">Back</a>
+</div>
 
 <% include partials/footer %>
