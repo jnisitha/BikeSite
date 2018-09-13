@@ -1,3 +1,7 @@
 body {
     background: lightblue;
 }
+
+.thumbnail .caption-full {
+    padding: 10px;
+}
