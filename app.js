@@ -1,7 +1,9 @@
 var express = require("express");
     app = express(),
     bodyParser = require("body-parser"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
+    BikeRouteMod = require("./models/bikeroute"),
+    seedDB = require("./seeds");
 
 mongoose.connect("mongodb://localhost/bike_routes");//intially creates the DB and subsequently connects to it.
 app.use(bodyParser.urlencoded({extended: true}));
@@ -9,20 +11,11 @@ app.use( express.static( "public" ) );
 
 app.set("view engine", "ejs");
 
-//Schema Setup
-var bikeRoutesSchema = new mongoose.Schema({
-    title: String,
-    image: String,
-    author: String,
-    description: String
-});
-
-var BikeRouteMod = mongoose.model("BikeRoute", bikeRoutesSchema);//creates the model from the schema
-
 app.get("/", function(req, res){
     res.render("landing");
 });
 
+seedDB();
 // BikeRouteMod.create(
 //     {
 //         title: "Niagara Route", 
@@ -36,12 +29,7 @@ app.get("/", function(req, res){
 //            console.log("created");
 //         }
 //     });
-// var bikeroutes = [
-//     {title: "Niagara Route", image: "/images/biketrip.jpg", author: "Nisitha"},
-//     {title: "Winter Biking", image: "/images/Branch.jpg", author: "Makroo"},
-//     {title: "Harbour Front Trail", image: "/images/windmill.jpg", author: "Nisitha"},
-//     {title: "Trip to Yelow Knife", image: "/images/YellowKnife.jpg", author: "Nisitha"}
-// ];
+
 
 //INDEX - 
 app.get("/bikeroutes", function(req, res){  
