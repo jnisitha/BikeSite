@@ -5,7 +5,14 @@ var bikeRoutesSchema = new mongoose.Schema({
     title: String,
     image: String,
     author: String,
-    description: String
+    description: String,
+    //Referencing the comments.
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "CommentMod"
+        }
+    ]
 });
 
-module.exports = mongoose.model("BikeRoute", bikeRoutesSchema);//creates the model from the schema
+module.exports = mongoose.model("BikeRouteMod", bikeRoutesSchema);//creates the model from the schema

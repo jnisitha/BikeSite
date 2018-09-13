@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var BikeRouteMod = require("./models/bikeroute");
+var CommentMod = require("./models/comment");
 
 var data = [
     {
@@ -28,7 +29,7 @@ var data = [
 
 function seedDB(){
     //Remove all campgrounds
-    BikeRouteMod.remove({}, function(err,removed){
+    BikeRouteMod.remove({}, function(err){
         if(err){
             console.log(err);
         }else{
@@ -37,11 +38,26 @@ function seedDB(){
     });
     //Add campgrounds
     data.forEach(function(seed){
-        BikeRouteMod.create(seed, function(err, data){
+        BikeRouteMod.create(seed, function(err, bikeroute){
             if(err){
                 console.log(err);
             }else{
                 console.log("adding a campground");
+                //Create comments.
+                CommentMod.create(
+                    {
+                        text: "This looks good. Hoping to visit it this weekend",
+                        author: "Aman Makroo"
+                    }, function(err, comment){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            bikeroute.comments.push(comment);
+                            bikeroute.save();
+                            console.log("Comment posted");
+                        }
+                    });
+
             }
         });
 

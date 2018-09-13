@@ -16,20 +16,6 @@ app.get("/", function(req, res){
 });
 
 seedDB();
-// BikeRouteMod.create(
-//     {
-//         title: "Niagara Route", 
-//         image: "/images/biketrip.jpg", 
-//         author: "Nisitha",
-//         description: "We travelled from Toronto to Niagara on bike!"    
-//     }, function(err, bikeroutes){
-//         if(err){
-//             console.log(err);
-//         }else{
-//            console.log("created");
-//         }
-//     });
-
 
 //INDEX - 
 app.get("/bikeroutes", function(req, res){  
@@ -38,7 +24,7 @@ app.get("/bikeroutes", function(req, res){
         if(err){
             console.log(err);
         }else{
-            res.render("index", {bikeroutes: allBikeroutes});
+            res.render("bikeroutes/index", {bikeroutes: allBikeroutes});
         }
     });
     //res.render ("bikeroutes", {bikeroutes: bikeroutes});
@@ -65,20 +51,27 @@ app.post("/bikeroutes", function(req, res){
 
 //NEW - show form to create new
 app.get("/bikeroutes/new", function(req, res){
-    res.render("new");
+    res.render("bikeroutes/new");
 });
 
 //SHOW -  show information about one bike route
 app.get("/bikeroutes/:id", function(req, res){
-    BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
+    BikeRouteMod.findById(req.params.id).populate("comments").exec(function(err, foundBikeRoute){
         if(err){
             console.log(err);
         }else{
-            res.render("show", {bikeroute: foundBikeRoute});
+            res.render("bikeroutes/show", {bikeroute: foundBikeRoute});
         }
     });
 });
 
+//=====================
+//COMMENTS ROUTES
+//=====================
+
+app.get("/bikeroutes/:id/comments/new", function(req, res){
+    res.render("comments/new");
+});
 
 app.listen(3000, function(){
     console.log("BikeSite has started!");

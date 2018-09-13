@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1>show template</h1>
+
+    <p><%=bikeroute.title%></p>
+
+    <img src= "<%=bikeroute.image%>">
+
+    <p><%=bikeroute.description%></p>
+
+    <% bikeroute.comments.forEach(function(comment){ %>
+        <p>
+            <strong><%= comment.author %></strong> - <%= comment.text %>
+        </p>
+    <% }) %>
+
+</div>
+<% include ../partials/footer %>
