@@ -1,22 +1,42 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <h1>show template</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">BikeRoutes</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <p class="lead"><strong><%=bikeroute.title%></strong></p>
 
-    <p><%=bikeroute.title%></p>
+            <div class="thumbnail">
+                <img class="img-responsive" src= "<%=bikeroute.image%>">
+            </div>
+            <div class="well">
+                <p><%=bikeroute.description%></p>
+            </div>
+            <div class="well">
+                <% bikeroute.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author %></strong>
+                            <span class="pull-right">10 days ago</span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+                <hr>
+                <button href="/bikeroutes/<%=bikeroute._id%>/comments/new" class="btn btn-primary">New Comment</button>
+            </div>
+        </div>
 
-    <img src= "<%=bikeroute.image%>">
+    </div>
 
-    <p><%=bikeroute.description%></p>
-
-
-    <% bikeroute.comments.forEach(function(comment){ %>
-        <p>
-            <strong><%= comment.author %></strong> - <%= comment.text %>
-        </p>
-    <% }) %>
-
-    <button href="/bikeroutes/<%=bikeroute._id%>/comments/new" class="btn btn-primary">New Comment</button>
-    
 </div>
 <% include ../partials/footer %>
