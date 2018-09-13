@@ -1,5 +1,25 @@
 <% include ../partials/header %>
 
-<h1> NEW COMMENT FORM </h1>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Add New Comment to <%= bikeroute.title %></h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action = "/bikeroutes/<%= bikeroute._id %>/comments" method = "POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment[text]" placeholder="Comment">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment[author]" placeholder="Author name">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block"> Submit Comment </button>
+                </div>
+            </form>
+            <a href="/bikroutes">Back</a>
+        </div>
+
+    </div>
+
+</div>
 
 <% include ../partials/footer %>
