@@ -16,11 +16,14 @@ router.get("/", function (req, res) {
 });
 
 //CREATE - add new to DB
-router.post("/", function (req, res) {
+router.post("/", isLoggedIn, function (req, res) {
     var title = req.body.title;
-    var image = req.body.image;
-    var author = req.body.author;
-    var description = req.body.description;
+        image = req.body.image,        
+        description = req.body.description,
+        author = {
+            id: req.user._id,
+            username: req.user.username
+        }
     var newBikeRoute = { title: title, image: image, description: description, author: author }
     //Create new Route and add to the DB
     BikeRouteMod.create(newBikeRoute, function (err, newlyCreated) {
@@ -35,7 +38,7 @@ router.post("/", function (req, res) {
 });
 
 //NEW - show form to create new
-router.get("/new", function (req, res) {
+router.get("/new", isLoggedIn, function (req, res) {
     res.render("bikeroutes/new");
 });
 

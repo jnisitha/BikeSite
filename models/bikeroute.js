@@ -4,7 +4,13 @@ var mongoose = require("mongoose");
 var bikeRoutesSchema = new mongoose.Schema({
     title: String,
     image: String,
-    author: String,
+    author:{
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "UserMod"
+        },
+        username: String
+    },
     description: String,
     //Referencing the comments.
     comments: [
