@@ -43,20 +43,20 @@ function seedDB(){
                 console.log(err);
             }else{
                 console.log("adding a campground");
-                //Create comments.
-                CommentMod.create(
-                    {
-                        text: "This looks good. Hoping to visit it this weekend",
-                        author: "Aman Makroo"
-                    }, function(err, comment){
-                        if(err){
-                            console.log(err);
-                        }else{
-                            bikeroute.comments.push(comment);
-                            bikeroute.save();
-                            console.log("Comment posted");
-                        }
-                    });
+                // //Create comments.
+                // CommentMod.create(
+                //     {
+                //         text: "This looks good. Hoping to visit it this weekend",
+                //         author: "Aman Makroo"
+                //     }, function(err, comment){
+                //         if(err){
+                //             console.log(err);
+                //         }else{
+                //             bikeroute.comments.push(comment);
+                //             bikeroute.save();
+                //             console.log("Comment posted");
+                //         }
+                //     });
 
             }
         });

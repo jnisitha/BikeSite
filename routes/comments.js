@@ -7,7 +7,7 @@ var CommentMod = require("../models/comment");
 //COMMENTS ROUTES
 //=====================
 
-//NEW
+//NEW - FORM
 router.get("/new", isLoggedIn, function (req, res) {
     //find bikeroute by id
     BikeRouteMod.findById(req.params.id, function (err, foundBikeroute) {
@@ -19,7 +19,7 @@ router.get("/new", isLoggedIn, function (req, res) {
     });
 });
 
-//POST
+//POST -CREATING COMMENT
 router.post("/", isLoggedIn, function (req, res) {
     BikeRouteMod.findById(req.params.id, function (err, bikeroute) {
         if (err) {
@@ -30,6 +30,10 @@ router.post("/", isLoggedIn, function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    //save the comment
+                    comment.save();
                     bikeroute.comments.push(comment);
                     bikeroute.save();
                     res.redirect("/bikeroutes/" + bikeroute._id);
