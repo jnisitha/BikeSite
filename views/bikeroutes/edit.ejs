@@ -18,6 +18,9 @@
                     <button class="btn btn-lg btn-primary btn-block"> Submit </button>
                 </div>
             </form>
+            <form action = "/bikeroutes/<%=bikeroute._id%>?_method=DELETE" method = "POST">
+                <button class="btn btn-danger btn-sm btn-block">Delete this post</button>
+            </form>
             <a href="/bikeroutes">Back</a>
         </div>
 

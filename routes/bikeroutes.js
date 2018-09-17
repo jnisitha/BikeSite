@@ -78,7 +78,15 @@ router.put("/:id", function(req, res){
 });
 
 //DESTROY THE BIKEROUTE
-
+router.delete("/:id", function(req, res){
+    BikeRouteMod.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/bikeroutes");
+        }else{
+            res.redirect("/bikeroutes");            
+        }
+    });
+});
 
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
