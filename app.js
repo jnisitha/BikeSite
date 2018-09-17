@@ -23,7 +23,7 @@ app.use(methodOverride("_method"));
 
 
 
-//seedDB();
+//seedDB(); // DANGER DANGER DANGER =================>> CURRENTLY SET TO DELETE ALL
 
 //PASSPORT CONFIGURATION    
 app.use(require("express-session")({

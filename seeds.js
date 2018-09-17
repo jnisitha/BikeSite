@@ -36,32 +36,32 @@ function seedDB(){
             console.log("removed");
         }
     });
-    //Add campgrounds
-    data.forEach(function(seed){
-        BikeRouteMod.create(seed, function(err, bikeroute){
-            if(err){
-                console.log(err);
-            }else{
-                console.log("adding a campground");
-                // //Create comments.
-                // CommentMod.create(
-                //     {
-                //         text: "This looks good. Hoping to visit it this weekend",
-                //         author: "Aman Makroo"
-                //     }, function(err, comment){
-                //         if(err){
-                //             console.log(err);
-                //         }else{
-                //             bikeroute.comments.push(comment);
-                //             bikeroute.save();
-                //             console.log("Comment posted");
-                //         }
-                //     });
+    // //Add campgrounds
+    // data.forEach(function(seed){
+    //     BikeRouteMod.create(seed, function(err, bikeroute){
+    //         if(err){
+    //             console.log(err);
+    //         }else{
+    //             console.log("adding a campground");
+    //             //Create comments.
+    //             CommentMod.create(
+    //                 {
+    //                     text: "This looks good. Hoping to visit it this weekend",
+    //                     author: "Aman Makroo"
+    //                 }, function(err, comment){
+    //                     if(err){
+    //                         console.log(err);
+    //                     }else{
+    //                         bikeroute.comments.push(comment);
+    //                         bikeroute.save();
+    //                         console.log("Comment posted");
+    //                     }
+    //                 });
 
-            }
-        });
+    //         }
+    //     });
 
-    });
+    // });
 }
 
 module.exports = seedDB;

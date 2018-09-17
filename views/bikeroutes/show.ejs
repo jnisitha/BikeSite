@@ -11,8 +11,13 @@
             </div>
         </div>
         <div class="col-md-9">
-            <p class="lead"><strong><%=bikeroute.title%> by <em><%=bikeroute.author.username%></em></strong><a href="/bikeroutes/<%= bikeroute._id%>/edit" class="btn btn-warning pull-right">Edit</a></p>
-
+            <p class="lead">
+                <strong>
+                    <%=bikeroute.title%> by <em><%=bikeroute.author.username%></em>
+                </strong>
+                <% if(currentUser && bikeroute.author.id.equals(currentUser._id)) { %>
+                    <a href="/bikeroutes/<%= bikeroute._id%>/edit" class="btn btn-warning pull-right">Edit</a></p>
+                <% } %>
             <div class="thumbnail">
                 <img class="img-responsive" src= "<%=bikeroute.image%>">
             </div>

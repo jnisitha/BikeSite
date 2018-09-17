@@ -54,19 +54,15 @@ router.get("/:id", function (req, res) {
 });
 
 //EDIT EXISTING BIKEROUTE.
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", authorizationCheck, function(req, res){
+    //Login check
     BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
-        if(err){
-            console.log(err);
-            res.redirect("/bikeroutes");
-        } else {
-            res.render("bikeroutes/edit", {bikeroute: foundBikeRoute});
-        }
+        res.render("bikeroutes/edit", {bikeroute: foundBikeRoute});
     });
 });
 
 //UPDATE THE BIKEROUTE.
-router.put("/:id", function(req, res){
+router.put("/:id", authorizationCheck, function(req, res){
     BikeRouteMod.findByIdAndUpdate(req.params.id, req.body.bikeroute, function(err, updatedBikeRoute){
         if (err){
             console.log(err);
@@ -78,7 +74,7 @@ router.put("/:id", function(req, res){
 });
 
 //DESTROY THE BIKEROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", authorizationCheck, function(req, res){
     BikeRouteMod.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/bikeroutes");
@@ -88,11 +84,31 @@ router.delete("/:id", function(req, res){
     });
 });
 
+//MIDDLEWARE ======
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
         return next();
     }
     res.redirect("/login");
+}
+
+function authorizationCheck(req, res, next){
+    if(req.isAuthenticated()){
+        BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
+            if(err){
+                console.log(err);
+                res.redirect("back");
+            } else {
+                if(foundBikeRoute.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    res.redirect("back");                    
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
 }
 
 
