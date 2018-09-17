@@ -24,7 +24,7 @@ router.post("/", isLoggedIn, function (req, res) {
     BikeRouteMod.findById(req.params.id, function (err, bikeroute) {
         if (err) {
             console.log(err);
-            res.redirect("/campgrounds");
+            res.redirect("/bikeroutes");
         } else {
             CommentMod.create(req.body.comment, function (err, comment) {
                 if (err) {
@@ -41,6 +41,30 @@ router.post("/", isLoggedIn, function (req, res) {
             })
         }
     });
+});
+
+//EDIT COMMENT
+router.get("/:comment_id/edit", function(req, res){
+    CommentMod.findById(req.params.comment_id, function(err, foundComment){
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        } else {
+            res.render("comments/edit", {bikeroute_id: req.params.id, comment: foundComment});            
+        }
+    })
+});
+
+//UPDATE COMMENT
+router.put("/:comment_id", function(req, res){
+    CommentMod.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+        if(err){
+            console.log(err);
+            //res.redirect("back");
+        } else {
+            res.redirect("/bikeroutes/" + req.params.id);
+        }
+    })
 });
 
 function isLoggedIn(req, res, next){
