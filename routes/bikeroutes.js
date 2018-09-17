@@ -66,6 +66,19 @@ router.get("/:id/edit", function(req, res){
 });
 
 //UPDATE THE BIKEROUTE.
+router.put("/:id", function(req, res){
+    BikeRouteMod.findByIdAndUpdate(req.params.id, req.body.bikeroute, function(err, updatedBikeRoute){
+        if (err){
+            console.log(err);
+            res.redirect("/:id");
+        } else {
+            res.redirect("/bikeroutes/" + req.params.id);
+        }
+    });
+});
+
+//DESTROY THE BIKEROUTE
+
 
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
