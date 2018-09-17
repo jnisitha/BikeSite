@@ -4,6 +4,7 @@ var express = require("express"),
     mongoose = require("mongoose"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
+    methodOverride = require("method-override"),
     BikeRouteMod = require("./models/bikeroute"),
     CommentMod = require("./models/comment"),
     UserMod = require("./models/user"),
@@ -16,9 +17,10 @@ var commentRoutes = require("./routes/comments"),
 
 mongoose.connect("mongodb://localhost/bike_routes", {useNewUrlParser: true});//intially creates the DB and subsequently connects to it.
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
-
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
+
 
 
 //seedDB();

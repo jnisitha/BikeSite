@@ -53,6 +53,20 @@ router.get("/:id", function (req, res) {
     });
 });
 
+//EDIT EXISTING BIKEROUTE.
+router.get("/:id/edit", function(req, res){
+    BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
+        if(err){
+            console.log(err);
+            res.redirect("/bikeroutes");
+        } else {
+            res.render("bikeroutes/edit", {bikeroute: foundBikeRoute});
+        }
+    });
+});
+
+//UPDATE THE BIKEROUTE.
+
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
         return next();
