@@ -39,7 +39,7 @@ passport.use(new LocalStrategy(UserMod.authenticate()));
 passport.serializeUser(UserMod.serializeUser());
 passport.deserializeUser(UserMod.deserializeUser());
 
-//Middleware for passing user.
+//Middleware for passing user. this adds currentUser to all templates
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
