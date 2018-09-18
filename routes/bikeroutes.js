@@ -54,7 +54,7 @@ router.get("/:id", function (req, res) {
 });
 
 //EDIT EXISTING BIKEROUTE.
-router.get("/:id/edit", authorizationCheck, function(req, res){
+router.get("/:id/edit", routeAuthorizationCheck, function(req, res){
     //Login check
     BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
         res.render("bikeroutes/edit", {bikeroute: foundBikeRoute});
@@ -62,7 +62,7 @@ router.get("/:id/edit", authorizationCheck, function(req, res){
 });
 
 //UPDATE THE BIKEROUTE.
-router.put("/:id", authorizationCheck, function(req, res){
+router.put("/:id", routeAuthorizationCheck, function(req, res){
     BikeRouteMod.findByIdAndUpdate(req.params.id, req.body.bikeroute, function(err, updatedBikeRoute){
         if (err){
             console.log(err);
@@ -74,7 +74,7 @@ router.put("/:id", authorizationCheck, function(req, res){
 });
 
 //DESTROY THE BIKEROUTE
-router.delete("/:id", authorizationCheck, function(req, res){
+router.delete("/:id", routeAuthorizationCheck, function(req, res){
     BikeRouteMod.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/bikeroutes");
@@ -92,7 +92,7 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
-function authorizationCheck(req, res, next){
+function routeAuthorizationCheck(req, res, next){
     if(req.isAuthenticated()){
         BikeRouteMod.findById(req.params.id, function(err, foundBikeRoute){
             if(err){
