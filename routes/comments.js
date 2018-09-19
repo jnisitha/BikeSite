@@ -2,13 +2,14 @@ var express = require("express");
 var router = express.Router({mergeParams: true});//this merges the params defined in bikeroutes.js with the ones here.
 var BikeRouteMod = require("../models/bikeroute");
 var CommentMod = require("../models/comment");
+var middleware = require("../middleware");
 
 //=====================
 //COMMENTS ROUTES
 //=====================
 
 //NEW - FORM
-router.get("/new", isLoggedIn, function (req, res) {
+router.get("/new", middleware.isLoggedIn, function (req, res) {
     //find bikeroute by id
     BikeRouteMod.findById(req.params.id, function (err, foundBikeroute) {
         if (err) {
@@ -20,7 +21,7 @@ router.get("/new", isLoggedIn, function (req, res) {
 });
 
 //POST -CREATING COMMENT
-router.post("/", isLoggedIn, function (req, res) {
+router.post("/", middleware.isLoggedIn, function (req, res) {
     BikeRouteMod.findById(req.params.id, function (err, bikeroute) {
         if (err) {
             console.log(err);
@@ -44,7 +45,7 @@ router.post("/", isLoggedIn, function (req, res) {
 });
 
 //EDIT COMMENT
-router.get("/:comment_id/edit", commentAuthorizationCheck, function(req, res){
+router.get("/:comment_id/edit", middleware.commentAuthorizationCheck, function(req, res){
     CommentMod.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             console.log(err);
@@ -56,7 +57,7 @@ router.get("/:comment_id/edit", commentAuthorizationCheck, function(req, res){
 });
 
 //UPDATE COMMENT
-router.put("/:comment_id", commentAuthorizationCheck, function(req, res){
+router.put("/:comment_id", middleware.commentAuthorizationCheck, function(req, res){
     CommentMod.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             console.log(err);
@@ -68,7 +69,7 @@ router.put("/:comment_id", commentAuthorizationCheck, function(req, res){
 });
 
 //DELETE COMMENT
-router.delete("/:comment_id", commentAuthorizationCheck, function(req, res){
+router.delete("/:comment_id", middleware.commentAuthorizationCheck, function(req, res){
     CommentMod.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
@@ -77,33 +78,5 @@ router.delete("/:comment_id", commentAuthorizationCheck, function(req, res){
         }
     });
 });
-
-//MIDDLEWARE =============
-
-function isLoggedIn(req, res, next){
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
-
-function commentAuthorizationCheck(req, res, next){
-    if(req.isAuthenticated()){
-        CommentMod.findById(req.params.comment_id, function(err, foundComment){
-            if(err){
-                console.log(err);
-                res.redirect("back");
-            } else {
-                if(foundComment.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    res.redirect("back");                    
-                }
-            }
-        });
-    } else {
-        res.redirect("back");
-    }
-}
 
 module.exports = router;
