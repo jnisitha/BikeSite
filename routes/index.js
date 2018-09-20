@@ -48,6 +48,7 @@ router.post("/login", passport.authenticate("local",
 //Logout route
 router.get("/logout", function (req, res) {
     req.logout();
+    req.flash("loggedOut", "Logged you out!");
     res.redirect("/bikeroutes");
 });
 

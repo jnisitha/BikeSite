@@ -28,4 +28,16 @@
     </div>
 </nav>
 
-<h1><%= message %></h1>
+<div class="container">
+    <% if (pleaseLogin && pleaseLogin.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= pleaseLogin %>
+        </div>
+    <% } %>
+    <% if (loggedOut && loggedOut.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= loggedOut %>
+        </div>
+    <% } %>
+</div>
+

@@ -44,7 +44,8 @@ passport.deserializeUser(UserMod.deserializeUser());
 //Middleware for passing user. this adds currentUser to all templates
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    res.locals.message = req.flash("error");
+    res.locals.pleaseLogin = req.flash("pleaseLogin");
+    res.locals.loggedOut = req.flash("loggedOut");
     next();
 });
 
