@@ -46,6 +46,10 @@ app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     res.locals.pleaseLogin = req.flash("pleaseLogin");
     res.locals.loggedOut = req.flash("loggedOut");
+    res.locals.notRouteOwner = req.flash("notRouteOwner");
+    res.locals.notCommentOwner = req.flash("notCommentOwner");
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

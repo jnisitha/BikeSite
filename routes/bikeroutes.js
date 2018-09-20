@@ -3,7 +3,7 @@ var router = express.Router();
 var BikeRouteMod = require("../models/bikeroute");
 var middleware = require("../middleware");//index.js is special. it is added when you require the directory.
 
-//INDEX - 
+//INDEX - Show the Recent Bikeroute posts
 router.get("/", function (req, res) {
     //Get BikeRoutes from the Database
     BikeRouteMod.find({}, function (err, allBikeroutes) {
@@ -69,6 +69,7 @@ router.put("/:id", middleware.routeAuthorizationCheck, function(req, res){
             console.log(err);
             res.redirect("/:id");
         } else {
+            req.flash("success", "Updated Post: " + updatedBikeRoute.title);
             res.redirect("/bikeroutes/" + req.params.id);
         }
     });
@@ -76,10 +77,11 @@ router.put("/:id", middleware.routeAuthorizationCheck, function(req, res){
 
 //DESTROY THE BIKEROUTE
 router.delete("/:id", middleware.routeAuthorizationCheck, function(req, res){
-    BikeRouteMod.findByIdAndRemove(req.params.id, function(err){
+    BikeRouteMod.findByIdAndRemove(req.params.id, function(err, deletedBikeRoute){
         if(err){
             res.redirect("/bikeroutes");
         }else{
+            req.flash("success", "Deleted Post: " + deletedBikeRoute.title);
             res.redirect("/bikeroutes");            
         }
     });

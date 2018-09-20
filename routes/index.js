@@ -22,10 +22,11 @@ router.post("/register", function (req, res) {
     var newUser = new UserMod({ username: req.body.username });
     UserMod.register(newUser, req.body.password, function (err, user) {
         if (err) {
-            console.log(err);
-            return res.render("register");
+            req.flash("error", err.message);
+            return res.redirect("/register");
         }
         passport.authenticate("local")(req, res, function () {
+            req.flash("success", "Welcome to Wheelsntrails! " + user.username);
             res.redirect("/bikeroutes");
         });
     });
