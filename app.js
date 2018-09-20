@@ -23,7 +23,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-
+//=====  CONSIDER INSTALLING NODEMON    =========
 
 //seedDB(); // DANGER DANGER DANGER =================>> CURRENTLY SET TO DELETE ALL
 
