@@ -4,7 +4,7 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h1>Welcome to Bike Routes Toronto</h1>
+            <h1>Welcome to Wheelsntrails</h1>
             <p>Wouldn't it be great if cyclists could get to know of cool little routes to travel around in Toronto? Know where the watering holes and beautiful parks are? This site provides just that! It's a place where you can blog your biking experiences and share with others. </p> 
             <a class="btn btn-primary btn-lg" href="/bikeroutes/new">Add new Bike Route</a>
         </div>
@@ -14,14 +14,13 @@
 
         <% bikeroutes.forEach(function(bikeroute){ %>
             <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src= "<%= bikeroute.image %>" >
-                    <div class="caption">
-                        <h4><%= bikeroute.title %></h4>
-                    </div>
-                    <p>
-                        <a href="/bikeroutes/<%= bikeroute._id %>" class="btn btn-primary">More info</a>
-                    </p>
+                <div class="thumbnail indexThumbnail">
+                    <a href="/bikeroutes/<%= bikeroute._id %>">
+                        <img src= "<%= bikeroute.image %>">
+                        <div class="caption">
+                            <h4><%= bikeroute.title %></h4>
+                        </div>                    
+                    </a>
                 </div>
             </div>
         <% }); %>

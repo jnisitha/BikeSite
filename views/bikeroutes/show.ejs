@@ -18,18 +18,17 @@
                 <% if(currentUser && bikeroute.author.id.equals(currentUser._id)) { %>
                     <a href="/bikeroutes/<%= bikeroute._id%>/edit" class="btn btn-warning pull-right">Edit</a></p>
                 <% } %>
-            <div class="thumbnail">
-                <img class="img-responsive" src= "<%=bikeroute.image%>">
+            <div class="thumbnail postImages">
+                <img class="img-responsive routeImage" src= "<%=bikeroute.image%>">
             </div>
-            <div class="well">
-                <p><%=bikeroute.description%></p>
+            <div class="well bgColorShowPage">
+                <p id="textForward"><%=bikeroute.description%></p>
             </div>
-            <div class="well">
+            <div class="well bgColorShowPage">
                 <% bikeroute.comments.forEach(function(comment){ %>
                     <div class="row">
-                        <div class="col-md-12">
-                            <strong><%= comment.author.username %></strong>
-                            <span class="pull-right">10 days ago</span>
+                        <div class="col-md-12 well bgColorShowPage">
+                            <strong id="textForward"><%= comment.author.username %> :</strong>                            
                             <p id="delete-form">
                                 <%= comment.text %>
                             </p>

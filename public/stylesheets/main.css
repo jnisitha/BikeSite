@@ -1,5 +1,5 @@
 body {
-    background: lightblue;
+    background: rgb(102, 135, 196);
 }
 
 .thumbnail .caption-full {
@@ -8,4 +8,46 @@ body {
 
 #delete-form {
     display: inline;
+}
+
+#textForward {
+    color: black;
+    z-index: 1;
+}
+
+.routeImage {
+    height: 75%;
+    width: 75%;
+    border: 0px;
+    padding: 0;    
+}
+
+.bgColorBox {
+    background-color: rgb(197, 221, 216);    
+}
+
+.bgColorShowPage {
+    background-color: rgb(102, 135, 196);
+}
+
+.postImages{
+    background-color: rgb(102, 135, 196);
+}
+
+.jumbotron {
+    background-image: url("../images/downsview.jpg");
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.1em;
+}
+
+.thumbnail .indexThumbnail{
+    background-color: rgb(197, 221, 216);    
+}
+
+.navbar {
+    background-color: rgb(197, 218, 221);
+    text-emphasis-color: black;
 }
