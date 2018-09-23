@@ -16,11 +16,7 @@ var commentRoutes = require("./routes/comments"),
     bikerouteRoutes = require("./routes/bikeroutes"),
     indexRoutes = require("./routes/index");
 
-<<<<<<< HEAD
 mongoose.connect('mongodb://db_1:27017/mymongodb', {useNewUrlParser: true});//intially creates the DB and subsequently connects to it. mongoose.connect('mongodb://localhost:27017/myapp');
-=======
-mongoose.connect('mongodb://172.17.0.1:27017/mymongodb', {useNewUrlParser: true});//intially creates the DB and subsequently connects to it. mongoose.connect('mongodb://localhost:27017/myapp');
->>>>>>> ea029d9a9573480c3392c1678c2392e31c4b3875
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
