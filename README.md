@@ -3,7 +3,7 @@ A blogging site for cyclists around Toronto.
 
 The Demo version of the app is running at https://www.wheelsntrails.ca.
 
-Future updates: (coming in the next two weeks)
+Future updates: (coming in future update)
 
 - Profile page for authors to easily access their posts.
 - A WYSIWYG editor for creating and editing posts, along with multiple image uploads.
